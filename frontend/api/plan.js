@@ -176,9 +176,19 @@ Return JSON format:
     let json;
     try { 
       json = JSON.parse(text);
+      console.log('OpenAI response keys:', Object.keys(json));
+      
       // Ensure milestones have complete property
       if (json.milestones) {
         json.milestones = json.milestones.map(m => ({ ...m, complete: false }));
+      }
+      
+      // Ensure learning goals and skills exist, provide defaults if missing
+      if (!json.learningGoals) {
+        json.learningGoals = ['Master Blockchain Development', 'Learn Smart Contract Design', 'Understand DApp Architecture', 'Build Real-World Project'];
+      }
+      if (!json.skillsToMaster) {
+        json.skillsToMaster = ['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask'];
       }
     } catch (e) {
       console.error('JSON parse error:', e);
