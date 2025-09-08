@@ -34,10 +34,10 @@ module.exports = async function handler(req, res) {
             { title: 'Write README + LinkedIn post', description: 'Document your project and create a professional showcase post', complete: false },
           ],
           learningGoals: [
-            'Master Smart Contract Development',
-            'Understand Decentralized Governance',
-            'Learn Voting Mechanisms',
-            'Build Real-World DApp'
+            'Smart Contracts',
+            'Decentralized Governance', 
+            'Voting Systems',
+            'DApp Development'
           ],
           skillsToMaster: [
             'Solidity',
@@ -59,10 +59,10 @@ module.exports = async function handler(req, res) {
             { title: 'Deploy and document', description: 'Deploy to testnet and create portfolio documentation', complete: false },
           ],
           learningGoals: [
-            'Master NFT Standards',
-            'Learn Marketplace Economics',
-            'Understand Digital Ownership',
-            'Build Real-World DApp'
+            'NFT Standards',
+            'Marketplace Economics',
+            'Digital Ownership',
+            'DApp Development'
           ],
           skillsToMaster: [
             'Solidity',
@@ -84,10 +84,10 @@ module.exports = async function handler(req, res) {
             { title: 'Test and deploy', description: 'Comprehensive testing and deployment to testnet', complete: false },
           ],
           learningGoals: [
-            'Understand DeFi Protocols',
-            'Learn Yield Farming',
-            'Master Liquidity Concepts',
-            'Build Real-World DApp'
+            'DeFi Protocols',
+            'Yield Farming',
+            'Liquidity Concepts',
+            'DApp Development'
           ],
           skillsToMaster: [
             'Solidity',
@@ -120,6 +120,12 @@ Generate a project that:
 - Has a clear portfolio value
 - Is beginner-friendly but impressive
 
+IMPORTANT: Keep learningGoals and skillsToMaster SHORT:
+- Learning goals: 1-4 words each (max 25 characters)
+- Skills: 1-3 words each (max 20 characters)
+- Use concise, impactful phrases
+- Examples: "Smart Contracts", "Web3 Integration", "DeFi Protocols", "Solidity", "React", "MetaMask"
+
 Return JSON format:
 {
   "title": "Project Name",
@@ -132,17 +138,17 @@ Return JSON format:
     }
   ],
   "learningGoals": [
-    "Specific learning objective 1",
-    "Specific learning objective 2",
-    "Specific learning objective 3",
-    "Specific learning objective 4"
+    "Short Goal 1",
+    "Short Goal 2",
+    "Short Goal 3",
+    "Short Goal 4"
   ],
   "skillsToMaster": [
-    "Technology/Skill 1",
-    "Technology/Skill 2", 
-    "Technology/Skill 3",
-    "Technology/Skill 4",
-    "Technology/Skill 5"
+    "Skill 1",
+    "Skill 2", 
+    "Skill 3",
+    "Skill 4",
+    "Skill 5"
   ]
 }`;
 
@@ -185,7 +191,7 @@ Return JSON format:
       
       // Ensure learning goals and skills exist, provide defaults if missing
       if (!json.learningGoals) {
-        json.learningGoals = ['Master Blockchain Development', 'Learn Smart Contract Design', 'Understand DApp Architecture', 'Build Real-World Project'];
+        json.learningGoals = ['Smart Contracts', 'Web3 Integration', 'DApp Architecture', 'Portfolio Project'];
       }
       if (!json.skillsToMaster) {
         json.skillsToMaster = ['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask'];

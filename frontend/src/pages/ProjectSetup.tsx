@@ -20,10 +20,10 @@ export default function ProjectSetup(){
       { title: 'Write README + LinkedIn post', description: 'Document your project and create a professional showcase post', complete: false },
     ],
     learningGoals: [
-      'Master Smart Contract Development',
-      'Understand Decentralized Governance', 
-      'Learn Voting Mechanisms',
-      'Build Real-World DApp'
+      'Smart Contracts',
+      'Decentralized Governance', 
+      'Voting Systems',
+      'DApp Development'
     ],
     skillsToMaster: [
       'Solidity',
@@ -80,13 +80,13 @@ export default function ProjectSetup(){
           title: project.title,
           description: project.description,
           milestones: project.milestones,
-          learningGoals: project.learningGoals || ['Master Blockchain Development', 'Learn Smart Contract Design', 'Understand DApp Architecture', 'Build Real-World Project'],
+          learningGoals: project.learningGoals || ['Smart Contracts', 'Web3 Integration', 'DApp Architecture', 'Portfolio Project'],
           skillsToMaster: project.skillsToMaster || ['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask']
         });
         // Store the new project in localStorage so dashboard can access it
         localStorage.setItem('current_project', JSON.stringify({
           ...project,
-          learningGoals: project.learningGoals || ['Master Blockchain Development', 'Learn Smart Contract Design', 'Understand DApp Architecture', 'Build Real-World Project'],
+          learningGoals: project.learningGoals || ['Smart Contracts', 'Web3 Integration', 'DApp Architecture', 'Portfolio Project'],
           skillsToMaster: project.skillsToMaster || ['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask']
         }));
         localStorage.setItem('milestones', JSON.stringify(project.milestones));
