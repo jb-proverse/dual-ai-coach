@@ -48,7 +48,7 @@ export default function Dashboard(){
     };
 
     const detectedSkills: string[] = [];
-    const allText = `${title} ${description} ${milestones.map(m => `${m.title} ${m.description}`).join(' ')}`;
+    const allText = `${title} ${description} ${milestones.map((m: any) => `${m.title} ${m.description}`).join(' ')}`;
     
     Object.entries(skillKeywords).forEach(([skill, keywords]) => {
       if (keywords.some(keyword => allText.includes(keyword))) {
