@@ -32,6 +32,19 @@ module.exports = async function handler(req, res) {
             { title: 'Build frontend with Web3.js', description: 'Create a React frontend that interacts with your smart contract', complete: false },
             { title: 'Connect frontend to contract', description: 'Integrate MetaMask and enable full DApp functionality', complete: false },
             { title: 'Write README + LinkedIn post', description: 'Document your project and create a professional showcase post', complete: false },
+          ],
+          learningGoals: [
+            'Master Smart Contract Development',
+            'Understand Decentralized Governance',
+            'Learn Voting Mechanisms',
+            'Build Real-World DApp'
+          ],
+          skillsToMaster: [
+            'Solidity',
+            'Web3.js',
+            'React',
+            'Ethereum',
+            'MetaMask'
           ]
         },
         {
@@ -44,6 +57,19 @@ module.exports = async function handler(req, res) {
             { title: 'Build React frontend', description: 'Create a user-friendly interface for the marketplace', complete: false },
             { title: 'Integrate IPFS storage', description: 'Store NFT metadata on decentralized storage', complete: false },
             { title: 'Deploy and document', description: 'Deploy to testnet and create portfolio documentation', complete: false },
+          ],
+          learningGoals: [
+            'Master NFT Standards',
+            'Learn Marketplace Economics',
+            'Understand Digital Ownership',
+            'Build Real-World DApp'
+          ],
+          skillsToMaster: [
+            'Solidity',
+            'IPFS',
+            'React',
+            'Ethereum',
+            'NFT'
           ]
         },
         {
@@ -56,6 +82,19 @@ module.exports = async function handler(req, res) {
             { title: 'Build user interface', description: 'Create a React app for interacting with the protocol', complete: false },
             { title: 'Add liquidity features', description: 'Implement adding and removing liquidity functionality', complete: false },
             { title: 'Test and deploy', description: 'Comprehensive testing and deployment to testnet', complete: false },
+          ],
+          learningGoals: [
+            'Understand DeFi Protocols',
+            'Learn Yield Farming',
+            'Master Liquidity Concepts',
+            'Build Real-World DApp'
+          ],
+          skillsToMaster: [
+            'Solidity',
+            'DeFi',
+            'Web3.js',
+            'Ethereum',
+            'React'
           ]
         }
       ];
@@ -64,7 +103,9 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({
         title: randomProject.title,
         description: randomProject.description,
-        milestones: randomProject.milestones
+        milestones: randomProject.milestones,
+        learningGoals: randomProject.learningGoals,
+        skillsToMaster: randomProject.skillsToMaster
       });
     }
 
@@ -89,6 +130,19 @@ Return JSON format:
       "description": "What the user will learn/do",
       "complete": false
     }
+  ],
+  "learningGoals": [
+    "Specific learning objective 1",
+    "Specific learning objective 2",
+    "Specific learning objective 3",
+    "Specific learning objective 4"
+  ],
+  "skillsToMaster": [
+    "Technology/Skill 1",
+    "Technology/Skill 2", 
+    "Technology/Skill 3",
+    "Technology/Skill 4",
+    "Technology/Skill 5"
   ]
 }`;
 

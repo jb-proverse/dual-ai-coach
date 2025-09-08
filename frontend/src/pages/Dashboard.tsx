@@ -86,10 +86,16 @@ export default function Dashboard(){
       const project = JSON.parse(projectData);
       setCurrentProject(project);
       
-      // Generate learning goals and skills based on project
-      const insights = generateProjectInsights(project);
-      setLearningGoals(insights.goals);
-      setSkillsToMaster(insights.skills);
+      // Use API-generated learning goals and skills if available, otherwise generate locally
+      if (project.learningGoals && project.skillsToMaster) {
+        setLearningGoals(project.learningGoals);
+        setSkillsToMaster(project.skillsToMaster);
+      } else {
+        // Fallback to local generation for older projects
+        const insights = generateProjectInsights(project);
+        setLearningGoals(insights.goals);
+        setSkillsToMaster(insights.skills);
+      }
     } else {
       // If no project, redirect to project setup
       navigate('/setup');
@@ -124,10 +130,16 @@ export default function Dashboard(){
         if (projectData) {
           const project = JSON.parse(projectData);
           setCurrentProject(project);
-          // Regenerate learning goals and skills based on new project
-          const insights = generateProjectInsights(project);
-          setLearningGoals(insights.goals);
-          setSkillsToMaster(insights.skills);
+          // Use API-generated learning goals and skills if available, otherwise generate locally
+          if (project.learningGoals && project.skillsToMaster) {
+            setLearningGoals(project.learningGoals);
+            setSkillsToMaster(project.skillsToMaster);
+          } else {
+            // Fallback to local generation for older projects
+            const insights = generateProjectInsights(project);
+            setLearningGoals(insights.goals);
+            setSkillsToMaster(insights.skills);
+          }
         }
       }
     };
