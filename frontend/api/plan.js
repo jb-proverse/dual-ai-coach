@@ -126,7 +126,9 @@ Return JSON format:
     console.error('OpenAI API error:', error);
     res.status(500).json({ 
       error: 'AI service error', 
-      detail: error.message 
+      detail: error.message,
+      hasApiKey: !!process.env.OPENAI_API_KEY,
+      apiKeyLength: process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.length : 0
     });
   }
 }
