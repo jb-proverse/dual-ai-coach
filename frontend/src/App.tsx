@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import { sendChat, type Role } from './lib/api';
+import { Milestones } from './components/Milestones';
 
 function App() {
   const [persona, setPersona] = useState<'engineer' | 'life'>('engineer');
@@ -32,6 +33,7 @@ function App() {
         <button onClick={onSend} className="mt-2 px-3 py-1 bg-blue-600 text-white" disabled={loading}>{loading ? 'Sending…' : 'Send'}</button>
       </div>
       <div className="mt-4 whitespace-pre-wrap border p-3 min-h-[120px]">{reply}</div>
+      <Milestones />
     </div>
   );
 }

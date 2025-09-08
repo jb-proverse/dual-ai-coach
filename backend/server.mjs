@@ -39,6 +39,30 @@ fastify.post('/chat', async (req, reply) => {
   }
 });
 
+fastify.post('/plan', async (req, reply) => {
+  try {
+    const { goal = '', experience = 'beginner', stack = '' } = req.body || {};
+    const system = 'You are Engineer Coach. Create 3-5 milestones with acceptance criteria as JSON under { "milestones": [ { "title": string, "description": string, "acceptance": string[] } ] }.';
+    const user = `Goal: ${goal}\nExperience: ${experience}\nStack: ${stack}`;
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      response_format: { type: 'json_object' },
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: user }
+      ],
+      temperature: 0.3
+    });
+    const text = response.choices?.[0]?.message?.content || '{}';
+    let json;
+    try { json = JSON.parse(text); } catch { json = { milestones: [] }; }
+    return json;
+  } catch (err) {
+    reply.code(500);
+    return { error: 'Plan error', detail: String(err) };
+  }
+});
+
 const port = Number(process.env.PORT || 3001);
 fastify.listen({ port, host: '0.0.0.0' }).then(() => {
   console.log(`API on ${port}`);
