@@ -3,13 +3,14 @@ import './App.css';
 import { sendChat, type Role } from './lib/api';
 import { ChatTabs } from './components/ChatTabs';
 import { ProgressBar } from './components/ProgressBar';
-import { Milestones } from './components/Milestones';
+import Milestones from './components/Milestones';
 
 function App() {
   const [persona, setPersona] = useState<'engineer' | 'life'>('engineer');
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{ role: Role; content: string }[]>([]);
   const [reply, setReply] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const progressPct = useMemo(() => {
@@ -31,7 +32,13 @@ function App() {
     setLoading(true);
     const r = await sendChat(persona, newMsgs, { title: 'Demo' });
     setLoading(false);
-    setReply(r.text || r.error || '');
+    if (r.error) {
+      setError(r.error);
+      return;
+    }
+    const assistantMsg = { role: 'assistant' as Role, content: r.text || '' };
+    setMessages(msgs => [...msgs, assistantMsg]);
+    setReply(r.text || '');
   };
 
   return (
@@ -45,7 +52,22 @@ function App() {
         <button onClick={onSend} className="mt-2 px-3 py-1 bg-blue-600 text-white" disabled={loading}>{loading ? 'Sending…' : 'Send'}</button>
       </div>
 
+      {error && (
+        <div className="mt-4 text-sm text-red-700 bg-red-50 border border-red-200 p-2 rounded">{error}</div>
+      )}
       <div className="mt-4 whitespace-pre-wrap border p-3 min-h-[120px]">{reply}</div>
+
+      {/* Simple chat history */}
+      {!!messages.length && (
+        <div className="mt-4 border rounded">
+          {messages.map((m, i) => (
+            <div key={i} className={(m.role==='user'?'bg-white':'bg-slate-50')+" p-2 border-b last:border-b-0"}>
+              <div className="text-xs uppercase text-slate-500">{m.role}</div>
+              <div className="whitespace-pre-wrap">{m.content}</div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <Milestones />
 

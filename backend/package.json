@@ -6,7 +6,7 @@
     "dev": "node server.mjs"
   },
   "dependencies": {
-    "@fastify/cors": "^11.1.0",
+    "@fastify/cors": "^8.5.0",
     "dotenv": "^17.2.2",
     "fastify": "^4.28.1",
     "openai": "^5.19.1"
