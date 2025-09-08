@@ -9,16 +9,87 @@ export default function Dashboard(){
   const { showToast, ToastContainer } = useToast();
   const [currentProject, setCurrentProject] = useState<any>(null);
   const [milestones, setMilestones] = useState<any[]>([]);
+  const [learningGoals, setLearningGoals] = useState<string[]>([]);
+  const [skillsToMaster, setSkillsToMaster] = useState<string[]>([]);
   
   const total = milestones.length || 0;
   const done = milestones.filter((m: any) => m.complete).length;
   const pct = total ? Math.round((done/total)*100) : 0;
 
+  // Generate learning goals and skills based on project
+  const generateProjectInsights = (project: any) => {
+    if (!project) return { goals: [], skills: [] };
+
+    const title = project.title?.toLowerCase() || '';
+    const description = project.description?.toLowerCase() || '';
+    const milestones = project.milestones || [];
+    
+    // Extract skills from project content
+    const skillKeywords = {
+      'solidity': ['solidity', 'smart contract', 'contract'],
+      'web3.js': ['web3', 'web3.js', 'ethereum'],
+      'react': ['react', 'frontend', 'ui', 'interface'],
+      'javascript': ['javascript', 'js', 'programming'],
+      'typescript': ['typescript', 'ts'],
+      'node.js': ['node', 'backend', 'server'],
+      'html': ['html', 'markup'],
+      'css': ['css', 'styling'],
+      'blockchain': ['blockchain', 'distributed', 'decentralized'],
+      'ethereum': ['ethereum', 'eth'],
+      'metamask': ['metamask', 'wallet'],
+      'ipfs': ['ipfs', 'storage'],
+      'truffle': ['truffle', 'testing'],
+      'hardhat': ['hardhat', 'development'],
+      'remix': ['remix', 'ide'],
+      'defi': ['defi', 'finance', 'yield'],
+      'nft': ['nft', 'token'],
+      'dao': ['dao', 'governance'],
+      'dapp': ['dapp', 'application']
+    };
+
+    const detectedSkills: string[] = [];
+    const allText = `${title} ${description} ${milestones.map(m => `${m.title} ${m.description}`).join(' ')}`;
+    
+    Object.entries(skillKeywords).forEach(([skill, keywords]) => {
+      if (keywords.some(keyword => allText.includes(keyword))) {
+        detectedSkills.push(skill);
+      }
+    });
+
+    // Generate learning goals based on project type
+    const goals: string[] = [];
+    if (title.includes('voting') || title.includes('governance')) {
+      goals.push('Understand Decentralized Governance', 'Learn Voting Mechanisms', 'Master Smart Contract Security');
+    } else if (title.includes('nft') || title.includes('marketplace')) {
+      goals.push('Master NFT Standards', 'Learn Marketplace Economics', 'Understand Digital Ownership');
+    } else if (title.includes('defi') || title.includes('yield')) {
+      goals.push('Understand DeFi Protocols', 'Learn Yield Farming', 'Master Liquidity Concepts');
+    } else if (title.includes('charity') || title.includes('donation')) {
+      goals.push('Learn Transparency Mechanisms', 'Master Donation Tracking', 'Understand Trust Systems');
+    } else {
+      goals.push('Master Blockchain Development', 'Learn Smart Contract Design', 'Understand DApp Architecture');
+    }
+
+    // Add generic blockchain goals
+    goals.push('Build Real-World DApp', 'Deploy to Testnet', 'Create Portfolio Project');
+
+    return {
+      goals: goals.slice(0, 4), // Limit to 4 goals
+      skills: [...new Set(detectedSkills)].slice(0, 5) // Limit to 5 unique skills
+    };
+  };
+
   useEffect(() => {
     // Load current project from localStorage
     const projectData = localStorage.getItem('current_project');
     if (projectData) {
-      setCurrentProject(JSON.parse(projectData));
+      const project = JSON.parse(projectData);
+      setCurrentProject(project);
+      
+      // Generate learning goals and skills based on project
+      const insights = generateProjectInsights(project);
+      setLearningGoals(insights.goals);
+      setSkillsToMaster(insights.skills);
     } else {
       // If no project, redirect to project setup
       navigate('/setup');
@@ -51,7 +122,12 @@ export default function Dashboard(){
       if (e.key === 'current_project') {
         const projectData = localStorage.getItem('current_project');
         if (projectData) {
-          setCurrentProject(JSON.parse(projectData));
+          const project = JSON.parse(projectData);
+          setCurrentProject(project);
+          // Regenerate learning goals and skills based on new project
+          const insights = generateProjectInsights(project);
+          setLearningGoals(insights.goals);
+          setSkillsToMaster(insights.skills);
         }
       }
     };
@@ -177,11 +253,11 @@ export default function Dashboard(){
             <div className="text-sm text-gray-500">Timeline</div>
           </div>
           <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-1">4</div>
+            <div className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-1">{learningGoals.length}</div>
             <div className="text-sm text-gray-500">Learning Goals</div>
           </div>
           <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-1">5</div>
+            <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-1">{skillsToMaster.length}</div>
             <div className="text-sm text-gray-500">Skills</div>
           </div>
         </div>
@@ -206,11 +282,13 @@ export default function Dashboard(){
             <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
               <h3 className="font-semibold mb-3 sm:mb-4 text-gray-800 text-sm sm:text-base">Learning Goals</h3>
               <div className="flex flex-wrap gap-2">
-                {['Learn Smart Contracts', 'Master Web3.js', 'Understand Blockchain', 'Build DApps'].map(goal => (
+                {learningGoals.length > 0 ? learningGoals.map(goal => (
                   <span key={goal} className="bg-purple-600 text-white px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-medium">
                     {goal}
                   </span>
-                ))}
+                )) : (
+                  <span className="text-gray-500 text-sm">Loading goals...</span>
+                )}
               </div>
             </div>
 
@@ -218,11 +296,13 @@ export default function Dashboard(){
             <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
               <h3 className="font-semibold mb-3 sm:mb-4 text-gray-800 text-sm sm:text-base">Skills to Master</h3>
               <div className="flex flex-wrap gap-2">
-                {['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask'].map(skill => (
+                {skillsToMaster.length > 0 ? skillsToMaster.map(skill => (
                   <span key={skill} className="bg-purple-600 text-white px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-medium">
                     {skill}
                   </span>
-                ))}
+                )) : (
+                  <span className="text-gray-500 text-sm">Loading skills...</span>
+                )}
               </div>
             </div>
           </div>
