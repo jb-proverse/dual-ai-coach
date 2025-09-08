@@ -18,12 +18,25 @@ export default function ProjectSetup(){
       { title: 'Build frontend with Web3.js', description: 'Create a React frontend that interacts with your smart contract', complete: false },
       { title: 'Connect frontend to contract', description: 'Integrate MetaMask and enable full DApp functionality', complete: false },
       { title: 'Write README + LinkedIn post', description: 'Document your project and create a professional showcase post', complete: false },
+    ],
+    learningGoals: [
+      'Master Smart Contract Development',
+      'Understand Decentralized Governance', 
+      'Learn Voting Mechanisms',
+      'Build Real-World DApp'
+    ],
+    skillsToMaster: [
+      'Solidity',
+      'Web3.js',
+      'React',
+      'Ethereum',
+      'MetaMask'
     ]
   });
 
   useEffect(() => {
-    // Load initial project
-    loadNewProject();
+    // Save the default project to localStorage immediately
+    localStorage.setItem('current_project', JSON.stringify(currentProject));
   }, []);
 
   // Countdown timer effect
@@ -66,10 +79,16 @@ export default function ProjectSetup(){
         setCurrentProject({
           title: project.title,
           description: project.description,
-          milestones: project.milestones
+          milestones: project.milestones,
+          learningGoals: project.learningGoals || ['Master Blockchain Development', 'Learn Smart Contract Design', 'Understand DApp Architecture', 'Build Real-World Project'],
+          skillsToMaster: project.skillsToMaster || ['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask']
         });
         // Store the new project in localStorage so dashboard can access it
-        localStorage.setItem('current_project', JSON.stringify(project));
+        localStorage.setItem('current_project', JSON.stringify({
+          ...project,
+          learningGoals: project.learningGoals || ['Master Blockchain Development', 'Learn Smart Contract Design', 'Understand DApp Architecture', 'Build Real-World Project'],
+          skillsToMaster: project.skillsToMaster || ['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask']
+        }));
         localStorage.setItem('milestones', JSON.stringify(project.milestones));
       }
     } catch (error) {
