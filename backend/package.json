@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs"
+  },
+  "dependencies": {
+    "fastify": "^4.28.1"
+  }
+}
