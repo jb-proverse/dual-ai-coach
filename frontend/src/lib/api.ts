@@ -1,7 +1,8 @@
 export type Role = 'user' | 'assistant' | 'system';
 
 export async function generateProject(generateNew: boolean = false): Promise<{ title?: string; description?: string; milestones?: any[]; error?: string }> {
-  const useMocks = String(import.meta.env.VITE_USE_MOCKS || '').toLowerCase() === 'true' || !import.meta.env.VITE_API_BASE;
+  // Always use real API in production (Vercel), mocks only in localhost development
+  const useMocks = window.location.hostname === 'localhost' && (String(import.meta.env.VITE_USE_MOCKS || '').toLowerCase() === 'true' || !import.meta.env.VITE_API_BASE);
   if (useMocks) {
     // Mock project generation with variety
     const mockProjects = [
@@ -70,7 +71,8 @@ export async function sendChat(
   messages: { role: Role; content: string }[],
   projectContext: Record<string, unknown>
 ): Promise<{ text?: string; error?: string }>{
-  const useMocks = String(import.meta.env.VITE_USE_MOCKS || '').toLowerCase() === 'true' || !import.meta.env.VITE_API_BASE;
+  // Always use real API in production (Vercel), mocks only in localhost development
+  const useMocks = window.location.hostname === 'localhost' && (String(import.meta.env.VITE_USE_MOCKS || '').toLowerCase() === 'true' || !import.meta.env.VITE_API_BASE);
   if (useMocks) {
     // Simple mock responses when no API key is available
     // const lastMessage = messages[messages.length - 1]?.content || '';
