@@ -1,9 +1,4 @@
-const OpenAI = require('openai');
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  timeout: 30000, // 30 second timeout
-});
+// Using fetch instead of OpenAI client for better compatibility
 
 module.exports = async function handler(req, res) {
   // Enable CORS
@@ -79,17 +74,31 @@ Response style: Warm, encouraging, empathetic. Focus on emotional support and le
 
     const systemPrompt = systemPrompts[persona] || systemPrompts.engineer;
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages
-      ],
-      temperature: persona === 'engineer' ? 0.4 : 0.8,
-      max_tokens: 500
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...messages
+        ],
+        temperature: persona === 'engineer' ? 0.4 : 0.8,
+        max_tokens: 500
+      })
     });
 
-    const text = response.choices?.[0]?.message?.content || 'Sorry, I could not generate a response.';
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const completion = { choices: data.choices };
+
+    const text = completion.choices?.[0]?.message?.content || 'Sorry, I could not generate a response.';
     
     res.status(200).json({ text });
   } catch (error) {

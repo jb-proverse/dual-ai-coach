@@ -1,9 +1,4 @@
-const OpenAI = require('openai');
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  timeout: 30000, // 30 second timeout
-});
+// Using fetch instead of OpenAI client for better compatibility
 
 module.exports = async function handler(req, res) {
   // Enable CORS
@@ -99,17 +94,31 @@ Return JSON format:
 
     const user = `Generate a ${generateNew ? 'completely new and different' : 'tailored'} blockchain project for ${experience} developers. ${goal ? `Focus on: ${goal}` : 'Choose an engaging project that teaches valuable skills.'} ${generateNew ? 'Make it unique and different from common projects like voting apps, NFT marketplaces, or DeFi protocols.' : ''}`;
     
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      response_format: { type: 'json_object' },
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: user }
-      ],
-      temperature: generateNew ? 1.0 : 0.8
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        response_format: { type: 'json_object' },
+        messages: [
+          { role: 'system', content: system },
+          { role: 'user', content: user }
+        ],
+        temperature: generateNew ? 1.0 : 0.8
+      })
     });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const completion = { choices: data.choices };
     
-    const text = response.choices?.[0]?.message?.content || '{}';
+    const text = completion.choices?.[0]?.message?.content || '{}';
     let json;
     try { 
       json = JSON.parse(text);
