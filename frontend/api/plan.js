@@ -2,6 +2,7 @@ const OpenAI = require('openai');
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  timeout: 30000, // 30 second timeout
 });
 
 module.exports = async function handler(req, res) {
@@ -128,7 +129,9 @@ Return JSON format:
       error: 'AI service error', 
       detail: error.message,
       hasApiKey: !!process.env.OPENAI_API_KEY,
-      apiKeyLength: process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.length : 0
+      apiKeyLength: process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.length : 0,
+      errorType: error.constructor.name,
+      stack: error.stack
     });
   }
 }
