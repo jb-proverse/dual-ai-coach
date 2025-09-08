@@ -4,6 +4,12 @@ export default {
     './index.html',
     './src/**/*.{ts,tsx}'
   ],
-  theme: { extend: {} },
+  theme: { 
+    extend: {
+      screens: {
+        'xs': '475px',
+      },
+    }
+  },
   plugins: []
 };

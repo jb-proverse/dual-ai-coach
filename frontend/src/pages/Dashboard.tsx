@@ -108,43 +108,46 @@ export default function Dashboard(){
       
       {/* Top Navigation Bar */}
       <nav className="bg-white/80 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm">🚀🧠</span>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <span className="text-white text-xs sm:text-sm">🚀🧠</span>
             </div>
-            <span className="font-bold text-lg">AI Portfolio Companion</span>
+            <span className="font-bold text-sm sm:text-lg hidden xs:block">AI Portfolio Companion</span>
+            <span className="font-bold text-sm sm:text-lg xs:hidden">AI Coach</span>
           </div>
-          <div className="flex items-center gap-4 text-sm">
-            <Link to="/dashboard" className="text-indigo-600 font-medium">Dashboard</Link>
-            <Link to="/chat" className="text-gray-600 hover:text-indigo-600 transition-colors">Chat</Link>
-            <button className="px-3 py-1 border rounded hover:bg-gray-50 transition-colors" onClick={async()=>{ if (supabase) await supabase.auth.signOut(); window.location.href = '/'; }}>Logout</button>
+          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+            <Link to="/dashboard" className="text-indigo-600 font-medium px-1 sm:px-0">Dashboard</Link>
+            <Link to="/chat" className="text-gray-600 hover:text-indigo-600 transition-colors px-1 sm:px-0">Chat</Link>
+            <button className="px-2 py-1 border rounded hover:bg-gray-50 transition-colors text-xs sm:text-sm" onClick={async()=>{ if (supabase) await supabase.auth.signOut(); window.location.href = '/'; }}>Logout</button>
           </div>
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 py-6" role="main" aria-label="Project Dashboard">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6" role="main" aria-label="Project Dashboard">
         {/* Progress Header Section */}
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-6" role="region" aria-label="Project Progress">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 mb-4 sm:mb-6" role="region" aria-label="Project Progress">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
             <div>
-              <div className="text-lg font-semibold text-gray-800">Overall progress: {pct}%</div>
+              <div className="text-lg sm:text-xl font-semibold text-gray-800">Overall progress: {pct}%</div>
               <div className="text-sm text-gray-500">{done} of {total} milestones completed</div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button 
                 onClick={handleCopyREADME}
-                className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center gap-2 transition-all duration-200"
+                className="px-3 py-2 sm:px-4 sm:py-2 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center justify-center gap-2 transition-all duration-200 text-sm"
               >
                 <span>📄</span>
-                <span>Copy README draft</span>
+                <span className="hidden sm:inline">Copy README draft</span>
+                <span className="sm:hidden">README</span>
               </button>
               <button 
                 onClick={handleCopyLinkedIn}
-                className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center gap-2 transition-all duration-200"
+                className="px-3 py-2 sm:px-4 sm:py-2 border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center justify-center gap-2 transition-all duration-200 text-sm"
               >
                 <span>📄</span>
-                <span>Copy LinkedIn draft</span>
+                <span className="hidden sm:inline">Copy LinkedIn draft</span>
+                <span className="sm:hidden">LinkedIn</span>
               </button>
             </div>
           </div>
@@ -168,43 +171,43 @@ export default function Dashboard(){
         </div>
 
         {/* Project Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
-            <div className="text-3xl font-bold text-gray-800 mb-1">2-months</div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-gray-800 mb-1">2-months</div>
             <div className="text-sm text-gray-500">Timeline</div>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
-            <div className="text-3xl font-bold text-indigo-600 mb-1">4</div>
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-indigo-600 mb-1">4</div>
             <div className="text-sm text-gray-500">Learning Goals</div>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-1">5</div>
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200 text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-1">5</div>
             <div className="text-sm text-gray-500">Skills</div>
           </div>
         </div>
 
         {/* Main Content Layout */}
-        <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
           {/* Left Side - Milestones */}
           <div className="flex-1">
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-xl">🗓️</span>
-                <h2 className="text-xl font-semibold text-gray-800">Project Milestones</h2>
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <span className="text-lg sm:text-xl">🗓️</span>
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Project Milestones</h2>
               </div>
-              <p className="text-gray-600 mb-6">Track your progress step by step.</p>
+              <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Track your progress step by step.</p>
               <Milestones />
             </div>
           </div>
 
           {/* Right Side - Learning Goals & Skills */}
-          <div className="w-full lg:w-80 space-y-6">
+          <div className="w-full lg:w-80 space-y-4 sm:space-y-6">
             {/* Learning Goals */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h3 className="font-semibold mb-4 text-gray-800">Learning Goals</h3>
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
+              <h3 className="font-semibold mb-3 sm:mb-4 text-gray-800 text-sm sm:text-base">Learning Goals</h3>
               <div className="flex flex-wrap gap-2">
                 {['Learn Smart Contracts', 'Master Web3.js', 'Understand Blockchain', 'Build DApps'].map(goal => (
-                  <span key={goal} className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span key={goal} className="bg-purple-600 text-white px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-medium">
                     {goal}
                   </span>
                 ))}
@@ -212,11 +215,11 @@ export default function Dashboard(){
             </div>
 
             {/* Skills to Master */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h3 className="font-semibold mb-4 text-gray-800">Skills to Master</h3>
+            <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-200">
+              <h3 className="font-semibold mb-3 sm:mb-4 text-gray-800 text-sm sm:text-base">Skills to Master</h3>
               <div className="flex flex-wrap gap-2">
                 {['Solidity', 'Web3.js', 'React', 'Ethereum', 'MetaMask'].map(skill => (
-                  <span key={skill} className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span key={skill} className="bg-purple-600 text-white px-2 py-1 sm:px-3 rounded-full text-xs sm:text-sm font-medium">
                     {skill}
                   </span>
                 ))}
@@ -228,13 +231,14 @@ export default function Dashboard(){
       </div>
 
       {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         <Link 
           to="/chat"
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 whitespace-nowrap text-sm sm:text-base"
         >
           <span>💬</span>
-          <span>Get AI Coaching Help</span>
+          <span className="hidden sm:inline">Get AI Coaching Help</span>
+          <span className="sm:hidden">AI Help</span>
         </Link>
       </div>
     </div>
