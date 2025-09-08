@@ -104,6 +104,13 @@
 - **Solution:** Migrated to Vercel serverless functions, updated API endpoints, added environment variables
 - **Lesson:** Production architecture must be considered from day one, not as an afterthought
 
+#### **6. Vercel API Functions Deployment Crisis**
+**The Problem:** API functions returning 405 errors, OpenAI integration completely broken in production
+- **Human Error:** Placed API functions in wrong directory, used ES modules instead of CommonJS
+- **Obstacle:** Vercel couldn't recognize or execute the API functions, serving HTML instead of API responses
+- **Solution:** Moved API functions to correct directory, converted to CommonJS syntax, updated Vercel configuration
+- **Lesson:** Platform-specific deployment requirements must be thoroughly researched and tested
+
 ### **Process & Workflow Lessons:**
 
 #### **Version Control Discipline**
@@ -143,7 +150,8 @@
 2. **Mobile-First is Mandatory** - Desktop-only applications are not viable
 3. **Production Architecture** - Plan for deployment from the beginning
 4. **Consistency is Critical** - Code patterns and conventions prevent cascading failures
-5. **Resilience Pays Off** - Persistence through technical challenges builds real skills
+5. **Platform-Specific Requirements** - Each deployment platform has unique constraints and syntax requirements
+6. **Resilience Pays Off** - Persistence through technical challenges builds real skills
 
 ## 🛠️ How We Built It
 
