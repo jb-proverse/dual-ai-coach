@@ -1,19 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-type Milestone = { title: string; description?: string; acceptance?: string[] };
+type Milestone = { title: string; description?: string; acceptance?: string[]; complete?: boolean };
 
 export function Milestones() {
   const [goal, setGoal] = useState('Build a portfolio project');
   const [items, setItems] = useState<Milestone[]>([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(()=>{ (window as any).__milestones = items; }, [items]);
+
   const plan = async () => {
     setLoading(true);
     const base = import.meta.env.VITE_API_BASE || 'http://localhost:3001';
     const res = await fetch(`${base}/plan`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ goal }) });
     const data = await res.json();
-    setItems(Array.isArray(data?.milestones) ? data.milestones : []);
+    const ms: Milestone[] = (Array.isArray(data?.milestones) ? data.milestones : []).map((m:any)=>({ ...m, complete:false }));
+    setItems(ms);
     setLoading(false);
   };
+
+  const toggle = (i:number) => setItems(items.map((m,idx)=> idx===i?{...m,complete:!m.complete}:m));
+
   return (
     <div className="mt-6">
       <h2 className="text-xl font-semibold">Milestones</h2>
@@ -24,7 +31,8 @@ export function Milestones() {
       <ol className="mt-4 list-decimal pl-6 space-y-2">
         {items.map((m,i)=> (
           <li key={i}>
-            <div className="font-medium">{m.title}</div>
+            <div className="flex items-center gap-2"><input type="checkbox" checked={!!m.complete} onChange={()=>toggle(i)} />
+              <div className="font-medium">{m.title}</div></div>
             {m.description && <div className="text-sm text-slate-600">{m.description}</div>}
             {!!m.acceptance?.length && (
               <ul className="list-disc pl-5 text-sm mt-1">
