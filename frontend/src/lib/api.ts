@@ -1,6 +1,6 @@
 export type Role = 'user' | 'assistant' | 'system';
 
-export async function generateProject(generateNew: boolean = false): Promise<{ title?: string; description?: string; milestones?: any[]; error?: string }> {
+export async function generateProject(generateNew: boolean = false): Promise<{ title?: string; description?: string; milestones?: any[]; learningGoals?: string[]; skillsToMaster?: string[]; error?: string }> {
   // Always use real API in production (Vercel), mocks only in localhost development
   const useMocks = window.location.hostname === 'localhost' && (String(import.meta.env.VITE_USE_MOCKS || '').toLowerCase() === 'true' || !import.meta.env.VITE_API_BASE);
   if (useMocks) {
