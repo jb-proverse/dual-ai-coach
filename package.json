@@ -7,6 +7,9 @@
     "dev": "cd frontend && npm run dev",
     "install": "cd frontend && npm install"
   },
+  "dependencies": {
+    "openai": "^4.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jb-proverse/dual-ai-coach.git"

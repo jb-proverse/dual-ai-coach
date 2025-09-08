@@ -48,7 +48,8 @@ export async function generateProject(generateNew: boolean = false): Promise<{ t
   }
   
   try {
-    const base = import.meta.env.VITE_API_BASE || 'http://localhost:3001';
+    // Use Vercel API endpoints in production, localhost in development
+    const base = import.meta.env.VITE_API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '/api');
     const res = await fetch(`${base}/plan`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -80,7 +81,8 @@ export async function sendChat(
     };
   }
   try {
-    const base = import.meta.env.VITE_API_BASE || 'http://localhost:3001';
+    // Use Vercel API endpoints in production, localhost in development
+    const base = import.meta.env.VITE_API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '/api');
     const res = await fetch(`${base}/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
