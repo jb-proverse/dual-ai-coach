@@ -1,0 +1,17 @@
+{
+  "name": "dual-ai-coach",
+  "version": "1.0.0",
+  "description": "AI-powered project companion for blockchain development learning",
+  "scripts": {
+    "build": "cd frontend && npm run build",
+    "dev": "cd frontend && npm run dev",
+    "install": "cd frontend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jb-proverse/dual-ai-coach.git"
+  },
+  "keywords": ["ai", "coaching", "blockchain", "react", "portfolio"],
+  "author": "Jalen Brown",
+  "license": "MIT"
+}
