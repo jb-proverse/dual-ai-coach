@@ -23,78 +23,78 @@ module.exports = async function handler(req, res) {
       // Mock project generation when no API key
       const mockProjects = [
         {
-          title: 'Decentralized Voting App',
-          description: 'A blockchain-based voting system using smart contracts',
+          title: 'Health Tracker Mobile App',
+          description: 'A B2C mobile app for tracking fitness goals and health metrics',
           milestones: [
-            { title: 'Research what a smart contract is', description: 'Learn the fundamentals of smart contracts and how they work on Ethereum', complete: false },
-            { title: 'Write a basic smart contract in Solidity', description: 'Create your first smart contract using Solidity programming language', complete: false },
-            { title: 'Deploy contract using Remix', description: 'Use Remix IDE to compile and deploy your contract to testnet', complete: false },
-            { title: 'Build frontend with Web3.js', description: 'Create a React frontend that interacts with your smart contract', complete: false },
-            { title: 'Connect frontend to contract', description: 'Integrate MetaMask and enable full DApp functionality', complete: false },
-            { title: 'Write README + LinkedIn post', description: 'Document your project and create a professional showcase post', complete: false },
+            { title: 'Set up React Native project', description: 'Initialize React Native with navigation and state management', complete: false },
+            { title: 'Design user authentication', description: 'Implement secure login and user registration system', complete: false },
+            { title: 'Build data tracking features', description: 'Create forms for logging workouts, meals, and health metrics', complete: false },
+            { title: 'Add data visualization', description: 'Create charts and graphs to display progress over time', complete: false },
+            { title: 'Implement push notifications', description: 'Add reminders and motivational notifications', complete: false },
+            { title: 'Deploy and document', description: 'Deploy to app stores and create portfolio documentation', complete: false },
           ],
           learningGoals: [
-            'Smart Contracts',
-            'Decentralized Governance', 
-            'Voting Systems',
-            'DApp Development'
+            'Mobile Development',
+            'Data Visualization',
+            'User Authentication',
+            'App Store Deployment'
           ],
           skillsToMaster: [
-            'Solidity',
-            'Web3.js',
-            'React',
-            'Ethereum',
-            'MetaMask'
+            'React Native',
+            'Firebase',
+            'Chart.js',
+            'Push Notifications',
+            'App Store'
           ]
         },
         {
-          title: 'NFT Marketplace',
-          description: 'A decentralized marketplace for buying and selling NFTs',
+          title: 'E-commerce Analytics Dashboard',
+          description: 'A B2B web application for analyzing e-commerce performance metrics',
           milestones: [
-            { title: 'Learn NFT basics', description: 'Understand what NFTs are and how they work on blockchain', complete: false },
-            { title: 'Create NFT smart contract', description: 'Build a Solidity contract for minting and managing NFTs', complete: false },
-            { title: 'Add marketplace functionality', description: 'Implement buying, selling, and bidding features', complete: false },
-            { title: 'Build React frontend', description: 'Create a user-friendly interface for the marketplace', complete: false },
-            { title: 'Integrate IPFS storage', description: 'Store NFT metadata on decentralized storage', complete: false },
-            { title: 'Deploy and document', description: 'Deploy to testnet and create portfolio documentation', complete: false },
+            { title: 'Set up React dashboard', description: 'Create responsive dashboard layout with routing', complete: false },
+            { title: 'Integrate analytics API', description: 'Connect to Google Analytics and e-commerce APIs', complete: false },
+            { title: 'Build data processing', description: 'Process and aggregate sales, traffic, and conversion data', complete: false },
+            { title: 'Create interactive charts', description: 'Build dynamic charts and tables for data visualization', complete: false },
+            { title: 'Add export features', description: 'Implement PDF and CSV export functionality', complete: false },
+            { title: 'Deploy and document', description: 'Deploy to production and create portfolio documentation', complete: false },
           ],
           learningGoals: [
-            'NFT Standards',
-            'Marketplace Economics',
-            'Digital Ownership',
-            'DApp Development'
+            'Data Analytics',
+            'API Integration',
+            'Dashboard Design',
+            'Business Intelligence'
           ],
           skillsToMaster: [
-            'Solidity',
-            'IPFS',
             'React',
-            'Ethereum',
-            'NFT'
+            'D3.js',
+            'Node.js',
+            'MongoDB',
+            'AWS'
           ]
         },
         {
-          title: 'DeFi Yield Farming App',
-          description: 'A decentralized finance application for yield farming',
+          title: 'Social Learning Platform',
+          description: 'A B2C web platform for collaborative learning and knowledge sharing',
           milestones: [
-            { title: 'Understand DeFi concepts', description: 'Learn about liquidity pools, yield farming, and AMMs', complete: false },
-            { title: 'Create token contracts', description: 'Build ERC-20 tokens for the farming protocol', complete: false },
-            { title: 'Implement staking mechanism', description: 'Create smart contracts for staking and rewards', complete: false },
-            { title: 'Build user interface', description: 'Create a React app for interacting with the protocol', complete: false },
-            { title: 'Add liquidity features', description: 'Implement adding and removing liquidity functionality', complete: false },
-            { title: 'Test and deploy', description: 'Comprehensive testing and deployment to testnet', complete: false },
+            { title: 'Set up full-stack project', description: 'Initialize React frontend and Node.js backend with database', complete: false },
+            { title: 'Build user profiles', description: 'Create user registration, profiles, and social features', complete: false },
+            { title: 'Implement content creation', description: 'Add tools for creating and sharing educational content', complete: false },
+            { title: 'Add collaboration features', description: 'Build commenting, rating, and discussion systems', complete: false },
+            { title: 'Create search and discovery', description: 'Implement search functionality and content recommendations', complete: false },
+            { title: 'Deploy and document', description: 'Deploy to production and create portfolio documentation', complete: false },
           ],
           learningGoals: [
-            'DeFi Protocols',
-            'Yield Farming',
-            'Liquidity Concepts',
-            'DApp Development'
+            'Social Features',
+            'Content Management',
+            'Search Algorithms',
+            'Community Building'
           ],
           skillsToMaster: [
-            'Solidity',
-            'DeFi',
-            'Web3.js',
-            'Ethereum',
-            'React'
+            'React',
+            'Node.js',
+            'PostgreSQL',
+            'Elasticsearch',
+            'Docker'
           ]
         }
       ];
@@ -110,21 +110,26 @@ module.exports = async function handler(req, res) {
     }
 
     // Real LLM project generation
-    const system = `You are an expert project generator for blockchain development learning. Create a complete project plan tailored for coding bootcamp students and self-taught developers.
+    const system = `You are an expert project generator for software development learning. Create diverse, portfolio-worthy projects for coding bootcamp students and self-taught developers.
 
 Generate a project that:
 - Is achievable in 2-4 weeks
-- Teaches real blockchain/Web3 skills
+- Teaches real, marketable skills
 - Has 6 specific, actionable milestones
-- Includes smart contract development
-- Has a clear portfolio value
+- Has clear portfolio value
 - Is beginner-friendly but impressive
+
+DIVERSIFY ACROSS:
+- Industries: Healthcare, Finance, E-commerce, Education, Entertainment, Social, Productivity, Gaming, Travel, Food, Real Estate, Fitness, etc.
+- Platforms: Web App, Mobile App, Desktop App, API, Chrome Extension, CLI Tool, etc.
+- Business Models: B2C (consumer), B2B (business), B2B2C, Marketplace, SaaS, etc.
+- Tech Stacks: React, Vue, Angular, Node.js, Python, Java, C#, Go, Rust, etc.
 
 IMPORTANT: Keep learningGoals and skillsToMaster SHORT:
 - Learning goals: 1-4 words each (max 25 characters)
 - Skills: 1-3 words each (max 20 characters)
 - Use concise, impactful phrases
-- Examples: "Smart Contracts", "Web3 Integration", "DeFi Protocols", "Solidity", "React", "MetaMask"
+- Examples: "API Development", "Database Design", "User Authentication", "React", "Node.js", "MongoDB"
 
 Return JSON format:
 {
@@ -152,7 +157,7 @@ Return JSON format:
   ]
 }`;
 
-    const user = `Generate a ${generateNew ? 'completely new and different' : 'tailored'} blockchain project for ${experience} developers. ${goal ? `Focus on: ${goal}` : 'Choose an engaging project that teaches valuable skills.'} ${generateNew ? 'Make it unique and different from common projects like voting apps, NFT marketplaces, or DeFi protocols.' : ''}`;
+    const user = `Generate a ${generateNew ? 'completely new and different' : 'tailored'} software project for ${experience} developers. ${goal ? `Focus on: ${goal}` : 'Choose a diverse project from different industries, platforms, and business models.'} ${generateNew ? 'Make it unique - avoid common projects like todo apps, weather apps, or basic CRUD apps. Think creatively across industries: healthcare, finance, e-commerce, education, entertainment, social, productivity, gaming, travel, food, real estate, fitness, etc.' : ''}`;
     
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',

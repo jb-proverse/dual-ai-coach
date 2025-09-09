@@ -9,28 +9,28 @@ export default function ProjectSetup(){
   const [refreshCount, setRefreshCount] = useState(0);
   const [cooldownTime, setCooldownTime] = useState(0);
   const [currentProject, setCurrentProject] = useState({
-    title: 'Decentralized Voting App',
-    description: 'A blockchain-based voting system using smart contracts',
+    title: 'Task Management SaaS',
+    description: 'A B2B web application for team collaboration and project management',
     milestones: [
-      { title: 'Research what a smart contract is', description: 'Learn the fundamentals of smart contracts and how they work on Ethereum', complete: false },
-      { title: 'Write a basic smart contract in Solidity', description: 'Create your first smart contract using Solidity programming language', complete: false },
-      { title: 'Deploy contract using Remix', description: 'Use Remix IDE to compile and deploy your contract to testnet', complete: false },
-      { title: 'Build frontend with Web3.js', description: 'Create a React frontend that interacts with your smart contract', complete: false },
-      { title: 'Connect frontend to contract', description: 'Integrate MetaMask and enable full DApp functionality', complete: false },
-      { title: 'Write README + LinkedIn post', description: 'Document your project and create a professional showcase post', complete: false },
+      { title: 'Set up React dashboard', description: 'Create responsive dashboard layout with routing and state management', complete: false },
+      { title: 'Build user authentication', description: 'Implement secure login, registration, and role-based access control', complete: false },
+      { title: 'Create project management features', description: 'Build task creation, assignment, and progress tracking functionality', complete: false },
+      { title: 'Add real-time collaboration', description: 'Implement WebSocket connections for live updates and team communication', complete: false },
+      { title: 'Build analytics dashboard', description: 'Create charts and reports for project performance and team productivity', complete: false },
+      { title: 'Deploy and document', description: 'Deploy to production and create portfolio documentation', complete: false },
     ],
     learningGoals: [
-      'Smart Contracts',
-      'Decentralized Governance', 
-      'Voting Systems',
-      'DApp Development'
+      'SaaS Development',
+      'Real-time Features',
+      'Team Collaboration',
+      'Analytics Dashboard'
     ],
     skillsToMaster: [
-      'Solidity',
-      'Web3.js',
       'React',
-      'Ethereum',
-      'MetaMask'
+      'Node.js',
+      'WebSockets',
+      'PostgreSQL',
+      'AWS'
     ]
   });
 
