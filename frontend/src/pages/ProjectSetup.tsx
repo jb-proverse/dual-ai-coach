@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { generateProject } from '../lib/api';
+import Navbar from '../components/Navbar';
 
 export default function ProjectSetup(){
   const navigate = useNavigate();
@@ -122,21 +123,7 @@ export default function ProjectSetup(){
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white p-6">
       {/* Header */}
-      <nav className="bg-white border-b sticky top-0 z-10 mb-8">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm">🚀🧠</span>
-            </div>
-            <span className="font-bold text-lg">AI Portfolio Companion</span>
-          </div>
-          <div className="flex items-center gap-4 text-sm">
-            <Link to="/dashboard" className="text-indigo-600 font-medium">Dashboard</Link>
-            <Link to="/chat" className="text-gray-600 hover:text-indigo-600">Chat</Link>
-            <button className="px-3 py-1 border rounded hover:bg-gray-50">Logout</button>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="max-w-2xl mx-auto">
         {/* Header */}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { sendChat, type Role } from '../lib/api';
+import Navbar from '../components/Navbar';
 
 export default function Chat(){
   const [persona, setPersona] = useState<'engineer'|'life'>('engineer');
@@ -76,29 +76,7 @@ export default function Chat(){
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="border-b sticky top-0 bg-white z-10">
-        <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link to="/dashboard" className="text-gray-600 hover:text-indigo-600 flex items-center gap-2">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              <span className="hidden sm:inline">Back to Tracker</span>
-            </Link>
-            <div>
-              <h1 className="text-xl font-bold text-indigo-600">AI Coaching</h1>
-              <p className="text-sm text-gray-500">Get help with Decentralized Voting App</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-gray-100 rounded">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
+      <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 py-6">
         {/* Coach Selection */}

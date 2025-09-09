@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Milestones from '../components/Milestones';
-import { supabase } from '../lib/supabase';
 import { useState, useEffect } from 'react';
 import { useToast } from '../components/Toast';
+import Navbar from '../components/Navbar';
 
 export default function Dashboard(){
   const navigate = useNavigate();
@@ -195,22 +195,7 @@ export default function Dashboard(){
       <ToastContainer />
       
       {/* Top Navigation Bar */}
-      <nav className="bg-white/80 backdrop-blur-lg border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white text-xs sm:text-sm">🚀🧠</span>
-            </div>
-            <span className="font-bold text-sm sm:text-lg hidden xs:block">AI Portfolio Companion</span>
-            <span className="font-bold text-sm sm:text-lg xs:hidden">AI Coach</span>
-          </div>
-          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-            <Link to="/dashboard" className="text-indigo-600 font-medium px-1 sm:px-0">Dashboard</Link>
-            <Link to="/chat" className="text-gray-600 hover:text-indigo-600 transition-colors px-1 sm:px-0">Chat</Link>
-            <button className="px-2 py-1 border rounded hover:bg-gray-50 transition-colors text-xs sm:text-sm" onClick={async()=>{ if (supabase) await supabase.auth.signOut(); window.location.href = '/'; }}>Logout</button>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6" role="main" aria-label="Project Dashboard">
         {/* Progress Header Section */}
